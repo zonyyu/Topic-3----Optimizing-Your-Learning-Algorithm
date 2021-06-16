@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import sklearn
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.preprocessing import PolynomialFeatures
 from bokeh.plotting import show, figure, output_notebook
 from bokeh.layouts import column
@@ -36,7 +36,7 @@ def disp_overfit():
     poly = PolynomialFeatures(degree = 10)
     xp = poly.fit_transform(x)
     model.fit(xp, y)
-    p = figure(width=600, height=400, x_range=(0, 7), y_range=(0, 5), x_axis_label="Input", y_axis_label="Output", title="Degree 1 Polynomial" )
+    p = figure(width=600, height=400, x_range=(0, 7), y_range=(0, 5), x_axis_label="Input", y_axis_label="Output", title="Degree 10 Polynomial" )
     p.circle(x.flatten(), y, color="blue", legend_label="Training")
 
     x_pred = np.arange(0, 7, 0.1).reshape(-1, 1)
@@ -60,7 +60,7 @@ def disp_good_fit():
     poly = PolynomialFeatures(degree = 3)
     xp = poly.fit_transform(x)
     model.fit(xp, y)
-    p = figure(width=600, height=400, x_range=(0, 7), y_range=(0, 5), x_axis_label="Input", y_axis_label="Output", title="Degree 1 Polynomial" )
+    p = figure(width=600, height=400, x_range=(0, 7), y_range=(0, 5), x_axis_label="Input", y_axis_label="Output", title="Degree 3 Polynomial" )
     p.circle(x.flatten(), y, color="blue", legend_label="Training")
 
     x_pred = np.arange(0, 7, 0.1).reshape(-1, 1)
@@ -105,5 +105,37 @@ def disp_cost_plots():
     p3.legend.location = "top_right"
     p3.legend.title = "Costs"
     
-    
+    output_notebook()   
     show(column(p1, p2, p3))
+
+
+def disp_reg(L2=1e2):
+
+    model = LinearRegression()
+    modelr = Ridge(alpha=L2)
+    poly = PolynomialFeatures(degree = 10)
+    xp = poly.fit_transform(x)
+    model.fit(xp, y)
+    p = figure(width=700, height=500, x_range=(0, 7), y_range=(0, 5), x_axis_label="Input", y_axis_label="Output", title="Degree 10 Polynomial with L2 vs without" )
+    p.circle(x.flatten(), y, color="blue")
+
+    x_pred = np.arange(0, 7, 0.01).reshape(-1, 1)
+    x_predp = poly.transform(x_pred)
+    y_pred = model.predict(x_predp)
+    p.line(x_pred.flatten(), y_pred, color='orange', legend_label="Degree 10 Polynomial")
+
+    p.circle(x_test.flatten(), y_test, color="red")
+
+    p.legend.location = "top_left"
+    # add a title to your legend
+    p.legend.title = "Regularization"
+
+    x_pr = poly.fit_transform(x)
+    modelr.fit(x_pr, y)
+
+    x_pred_r = np.arange(0, 7, 0.01).reshape(-1, 1)
+    y_pred_r = modelr.predict(poly.transform(x_pred_r))
+    p.line(x_pred_r.flatten(), y_pred_r, color="green", legend_label="Degree 10 Polynomial with L2")
+
+    output_notebook()
+    show(p)
