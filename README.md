@@ -7,7 +7,7 @@ This repository contains all the teaching material related to **Optimizing Your 
 
 This section details instructions to guide the instructor in delivering the course. The instructor should fill out the blank notebooks in the `workshop` branch according to the reference in the `master` branch (if it is possible, use dual monitors so you can have the reference code opened side by side.) **There will be function calls already written in the blank notebook, please run those calls without modifications.**
 
-Below is the curriculum of this repository, as well as the order of content to be delivered. **Be sure to familiarize yourself with the code before teaching! Feel free to explore the notebooks as well as the web app `suv.py`**.
+Below is the curriculum of this repository, as well as the order of content to be delivered. **Be sure to familiarize yourself with the code before teaching! Feel free to explore the notebooks for course material as well as the programming exercise `Cat-astrophe.ipynb`.**
 
 ### Getting set up (Jupyter Notebok)
 1. Clone this repo into a working directory
@@ -127,3 +127,29 @@ Below is the curriculum of this repository, as well as the order of content to b
 
 - Suggestions on training your ML Model
     - **These suggestions are important!** Go over these suggestions with students at a reasonable pace so that they fully understand.
+
+
+## Cat-astrophe
+- This notebook revolves around a whacky story about the city of Dogtopia. Feel free to narrate the text.
+- There are only two cells the students need to edit: The cell containing the L2 Hyperparameter, and the cell under **Testing Your Model**.
+- **Recommended to be run solely in Colab**
+- Briefly commentate on each cell, but don't go too in-depth
+
+### Their Model
+- Do not explain anything about the model itself; Convolutional Neural Networks are outside the scope of this course
+- Train their model, and commentate on the loss and accuracy metrics
+- Their model should overfit like crazy.
+
+### Your Take
+##### THE GAME OF L2 EVOLUTION
+**=== RULES ===**
+- Do NOT change learning rate
+- Do NOT change number of EPOCHS
+- have each student choose a random L2 regularization value they think is gonna work the best
+- Have them train their models
+- Whoever has the highest cross validation accuracy gets to "pass down" their L2 value
+- Repeat! Have students choose L2 values close to the previous winning entry
+- Try to converge on the optimal L2 value
+
+### Testing Your Model
+- Write code for displaying testing inputs and predictions
