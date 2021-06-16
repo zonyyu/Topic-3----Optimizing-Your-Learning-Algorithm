@@ -1,7 +1,7 @@
 # Topic 3 -- Optimizing Your Learning Algorithm
 
 ## Overview of this Repository
-This repository contains all the teaching material related to **Logistic Regression**. The master `branch` contains the sample code for the instructor to **reference**, and the `workshop` branch contains the **empty notebooks** for the instructor and students to program in.
+This repository contains all the teaching material related to **Optimizing Your Learning Algorithm**. The master `branch` contains the sample code for the instructor to **reference**, and the `workshop` branch contains the **empty notebooks** for the instructor and students to program in.
 
 ## For the Instructors:
 
